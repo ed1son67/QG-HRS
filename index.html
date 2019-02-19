@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>加入我们 | QG Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <link rel="shortcut icon" href="../static/img/little_logo.jpg" /> -->
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    function IEVersion() {
+            var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+            var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+            var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器  
+            var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+            if(isIE) {
+                var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                reIE.test(userAgent);
+                var fIEVersion = parseFloat(RegExp["$1"]);
+                if(fIEVersion == 7) {
+                    return 7;
+                } else if(fIEVersion == 8) {
+                    return 8;
+                } else if(fIEVersion == 9) {
+                    return 9;
+                } else if(fIEVersion == 10) {
+                    return 10;
+                } else {
+                    return 6;//IE版本<=7
+                }   
+            } else if(isEdge) {
+                return 'edge';//edge
+            } else if(isIE11) {
+                return 11; //IE11  
+            }else{
+                return -1;//不是ie浏览器
+            }
+    }
+    if (IEVersion() <= 10 && IEVersion() > 0) {
+        document.body.innerHTML = "<div style='background: #00a1d6; text-align: center; padding: 10px 0; color: #fff;'>为了保护你的账号安全，该网页已不支持IE10及以下版本浏览器访问，建议你升级到IE最新版本浏览器，或使用Chrome等其他浏览器。</div>"
+    }
+    </script>
+</html>
