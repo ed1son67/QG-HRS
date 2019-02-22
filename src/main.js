@@ -3,12 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import Antd from 'ant-design-vue';
-// import 'ant-design-vue/dist/antd.css'
 import '../static/normalize.css'
 import store from './store'
 
-import { Button, Steps, Form, Cascader, Checkbox, Col, Input, Radio, Row, Select, Switch, Tooltip, Icon} from 'ant-design-vue';
+import { Button, Steps, Form, Cascader, Checkbox, Col, Input, Radio, Row, Select, Switch, Tooltip, Icon, Card, Modal} from 'ant-design-vue';
 // Vue.component(Button.name, Button);
 // Vue.component(Steps.name, Steps);
 // Vue.component(Form.name, Form);
@@ -26,6 +24,7 @@ Vue.use(Select);
 Vue.use(Switch);
 Vue.use(Tooltip);
 Vue.use(Icon);
+Vue.use(Modal);
 
 // Vue.use(Antd);
 Vue.config.productionTip = false
@@ -51,7 +50,7 @@ router.beforeEach(function (to, from, next) {
 
     
 
-    const path = ['personalInfo', 'study', 'detail', 'apply', 'result'];
+    const path = ['personalInfo', 'study', 'detail', 'apply'];
     let toIndex = path.indexOf(to.name);
 
     if (right[toIndex] == true) {

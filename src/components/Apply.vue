@@ -70,10 +70,29 @@
                 </a-radio-group>        
             </a-form-item>
             <a-form-item >
-                <a-button type="primary" html-type="submit">下一页</a-button>
+                <a-button type="primary" html-type="submit">确认无误，投递简历</a-button>
                 <a-button style="margin-left: 8px" @click="prevPage">上一页</a-button>
             </a-form-item>
         </a-form>
+        <a-modal
+            title="投递简历"
+            :visible="visible"
+            @ok="handleOk"
+            :confirmLoading="confirmLoading"
+            @cancel="handleCancel"
+            centered
+            :closable=false
+            :maskClosable=false
+            :keyboard=false
+            :okText="okText"
+            :cancelText="cancelText"
+            width='600px'
+            :bodyStyle=" {padding: '30px' }"
+
+            >
+            <p>{{ModalText}}</p>
+            <p v-show="showCountDown">页面将会在{{countDown}}秒后跳转</p>
+    </a-modal>
     </div>
 </template>
 
@@ -86,11 +105,20 @@
                 formItemLayout: {
                     labelCol: { span: 5},
                     wrapperCol: { span: 19 },
+                    
                 },
+                ModalText: '亲爱的' + name + '同学，我们期待你的加入！',
+                visible: false,
+                confirmLoading: false,
+                okText: '确认投递',
+                cancelText: '我再想想',
+                countDown: 3,
+                showCountDown: false 
             }
         },
         computed: {
             ...mapState({   
+                name: state => state.personalInfo.name,
                 group: state => state.apply.group,
                 isObey: state => state.apply.isObey,
                 isSingle: state => state.apply.isSingle,
@@ -100,6 +128,7 @@
             })
         },
         watch: {
+           
             isSingle(val) {
                 if (val == false) {
                     this.$store.commit('resetTeam');
@@ -152,17 +181,64 @@
             });
         },
         methods: {
+            showModal() {
+                this.visible = true
+            },
+            handleOk(e) {
+                this.ModalText = '正在为你光速投递简历，请不要关闭网页！';
+                this.confirmLoading = true;
+
+                let request = this.$store.dispatch("sent");
+                let self = this;
+
+                request.then(function(res){
+                    console.log(res);
+                    if (res) 
+                        this.ModalText = '您的网络似乎有问题，请检查后重试';
+                    else {
+                        this.showCountDown = true;
+                        this.ModalText = '投递简历成功，我们将会以短信的形式联系你，请密切留意手机短信！';
+
+                        // setcountDownout(() => {
+                        // // this.visible = false;
+                        
+                        // this.countDown--;
+                        // }, 1000);
+                        let itvl = setInterval(function() {
+                                self.countDown--
+                                console.log(self.countDown)
+                            if (self.countDown <= 0) clearInterval(itvl)
+                        }, 1000)
+                        
+                    }
+                }).catch(function(err){
+
+                }); 
+
+                
+                
+                    
+                this.ModalText = '投递简历成功，我们将会以短信的形式联系你，请密切留意手机短信！';
+
+               
+                this.showCountDown = true;
+
+                let itvl = setInterval(function() {
+                           self.countDown--
+                           console.log(self.countDown)
+                    if (self.countDown <= 0) clearInterval(itvl)
+                }, 1000)
+                
+            },
+            handleCancel(e) {
+                console.log('Clicked cancel button');
+                this.visible = false
+            },
             onChange(e) {
                 console.log(e.target.checked)
-                let statu = e.target.checked;
-                
-               
+                let state = e.target.checked;
             },
-            nextPage() {
-                // this.$store.state.app.right[4] = true;
-                this.$store.commit('nextPage', 4);
-                this.$router.push('result');
-            },
+           
             prevPage() {
                 this.$store.commit('prevPage');
                 this.$router.push('detail');
@@ -172,8 +248,8 @@
                 this.form.validateFields((err, values) => {
                     if (!err) {
                         
-                        this.$store.dispatch("sent");
-                        this.nextPage();
+                        this.showModal();
+                        // this.nextPage();
                     }
                 });
             },

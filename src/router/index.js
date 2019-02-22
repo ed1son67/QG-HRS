@@ -4,7 +4,6 @@ import apply from '@/components/apply'
 import personalInfo from '@/components/PersonalInfo'
 import study from '@/components/Study'
 import detail from '@/components/Detail'
-import result from '@/components/Result'
 
 
 
@@ -36,12 +35,6 @@ export default new Router({
         name: 'detail',
         component: detail,
         meta: {title: '实践经历 | QG Studio'}
-    },
-    {
-        path: '/result',
-        name: 'result',
-        component: result,
-        meta: {title: '加入我们 | QG Studio'}
     },
     {
         path: '*', 

@@ -35,7 +35,6 @@ import personalInfo from './components/PersonalInfo.vue';
 import study from './components/Study.vue';
 import apply from '@/components/apply.vue';
 import detail from '@/components/Detail.vue';
-import result from '@/components/Result.vue';
 import { mapState } from 'vuex';
 
 
@@ -55,8 +54,6 @@ export default {
                 title: '实践经历',
                 }, {
                 title: '应征方向',
-                },{
-                title: '投递简历',
             }],
         }
     },
@@ -70,7 +67,6 @@ export default {
         study,
         apply,
         detail,
-        result
     },
     beforeCreate() {
         // 刷新网页时返回到初始页面

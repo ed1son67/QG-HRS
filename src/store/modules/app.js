@@ -27,15 +27,21 @@ const actions = {
 
         console.log(data);
 
-        myAxios({
-            method: 'POST',
-            url: '',
-            data: data
-        }).then(function(res){
+        // myAxios({
+        //     method: 'POST',
+        //     url: '',
+        //     data: data
+        // }).then(function(res){
             
-        }).catch(function(err){
+        // }).catch(function(err){
             
-        });
+        // });
+        return myAxios({
+                method: 'POST',
+                url: '',
+                data: data
+        })
+       
     }
 };
 
