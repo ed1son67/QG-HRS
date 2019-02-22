@@ -2,12 +2,12 @@ import types from '../types/personalInfo';
 
 // 变量
 const state = {
-    hobby: '',
+    interest: '',
     motto: '',
     evaluation: '',
-    explanation: '',
-    reason: '',
-    experience: '',
+    otherMsg: '',
+    planAndReason: '',
+    oneThing: '',
 };
 
 const actions = {

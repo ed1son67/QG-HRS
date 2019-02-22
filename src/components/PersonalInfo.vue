@@ -1,82 +1,25 @@
 <template>
-    <div class="main">
-       
-        <!-- <div class="item">
-            <div class="label">
-                学号*
-            </div>
-            <div class="right">
-                <a-input placeholder="请输入学号" style="width:300px;" v-model="SID" id="success"/>
-            </div>
-        </div>
-        <div class="item">
-            <div class="label">
-                性别*
-            </div>
-            <div class="right">
-                <a-radio-group v-model="value" >
-                    <a-radio :value="1">男</a-radio>
-                    <a-radio :value="2">女</a-radio>
-                </a-radio-group>
-            </div>
-        </div> -->
-        <!-- <div class="item">
-            <div class="label">
-                宿舍*
-            </div>
-            <div class="right">
-                <a-cascader :options="buildings" @change="onChange" changeOnSelect placeholder="请选择楼栋" />
-            </div>
-        </div> -->
-        <!-- <div class="item">
-            <div class="label">
-                专业班级*
-            </div>
-            <div class="right">
-                <a-input placeholder="请输入专业班级" style="width:300px;" />
-            </div>
-        </div> -->
-        <!-- <div class="item">
-            <div class="label">
-                手机号码*
-            </div>
-            <div class="right">
-                <a-input placeholder="请输入手机号码" style="width:300px;" />
-            </div>
-        </div> -->
-        <!-- <div class="item">
-            <div class="label">
-                QQ*
-            </div>
-            <div class="right">
-                <a-input placeholder="请输入QQ" style="width:300px;" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="label">
-                邮箱*
-            </div>
-            <div class="right">
-                <a-input placeholder="请输入邮箱" style="width:300px;" />
-            </div>
-        </div>     -->
-
+    <div majorAndClass="main">
         <a-form :form="form"  @submit="handleSubmit">
             <a-form-item label="姓名"  v-bind="formItemLayout" has-feedback>
                 <a-input v-decorator="[ 'name', {rules: [{ required: true, message: '请输入你的名字!' }]}]" placeholder="请输入你的名字" />
             </a-form-item>
-            <a-form-item label="性别*" v-bind="formItemLayout">
+            <a-form-item label="性别" v-bind="formItemLayout">
                  <a-radio-group   
-                    v-decorator="[ 'gender', {rules: [
+                    v-decorator="[ 'sex', {rules: [
                         { required: true, message: '请选择性别！' }                   
                     ]}]" >
-                    <a-radio :value="1">男</a-radio>
-                    <a-radio :value="0">女</a-radio>
+                    <a-radio value="male">男</a-radio>
+                    <a-radio value="female">女</a-radio>
                 </a-radio-group>
+            </a-form-item>
+            <a-form-item label="年龄"  v-bind="formItemLayout" has-feedback>
+                <a-input v-decorator="[ 'age', {rules: [{ required: true, message: '请输入正确的年龄！', pattern: /^[1-9]\d*$/, transform: value => +value }]}]" placeholder="请输入你的年龄" />
+                
             </a-form-item>
              <a-form-item label="手机号码"  v-bind="formItemLayout" has-feedback>
                 <a-input 
-                    v-decorator="[ 'phone', {rules: [
+                    v-decorator="[ 'tel', {rules: [
                         { required: true, message: '请输入正确的手机号码!', pattern: /^\d{11}$/, transform: value => +value}                                       
                     ]}]" placeholder="请输入你的手机号码" />
             </a-form-item>
@@ -95,30 +38,47 @@
             </a-form-item>
              <a-form-item label="学号"  v-bind="formItemLayout" has-feedback>
                 <a-input 
-                    v-decorator="[ 'userID', {rules: [
+                    v-decorator="[ 'id', {rules: [
                         { required: true, message: '请输入正确的学号！', pattern: /^\d{10}$/, transform: value => +value }                   
                     ]}]" placeholder="请输入你的学号" />
-            </a-form-item>  
-            <a-form-item label="楼栋"  v-bind="formItemLayout"  has-feedback>
-                    <a-cascader :options="buildings"  changeOnSelect  placeholder="请选择楼栋"
-                        v-decorator="[ 'building', {rules: [
-                            { required: true, message: '请选择楼栋!' }                   
-                        ]}]" 
-                        style="width: 150px; "
-                    />    
-            </a-form-item>        
-            <a-form-item label="房间号" v-bind="formItemLayout" has-feedback >
-                <a-input 
-                    v-decorator="[ 'room', {rules: [
-                        { required: true, message: '请输入正确的房间号！', pattern: /^\d{3}$/, transform: value => +value }
-                    ]}]" placeholder="房间号" 
-                     style="width: 130px; "
-                />
-            </a-form-item>
-            
-            <a-form-item label="专业班级" v-bind="formItemLayout" has-feedback>
-                <a-input v-decorator="[ 'class', {rules: [{ required: true, message: '请输入专业班级！' }]}]" placeholder="请输入专业班级" />                
-            </a-form-item>
+            </a-form-item>   
+            <a-row :gutter="4">
+                <a-col :span="12" >
+                    <a-form-item label="宿舍" :wrapper-col="{ span: 9 }" :label-col="{ span: 14 }" >
+                        <a-cascader :options="buildings"  changeOnSelect  placeholder="请选择楼栋"
+                            v-decorator="[ 'host', {rules: [
+                                { required: true, message: '请选择楼栋!' }                   
+                            ]}]"    
+                            
+                        />     
+                    </a-form-item>  
+                </a-col>
+                <a-col :span="12" >
+                    <a-form-item :wrapper-col="{ span: 8 }"  has-feedback  >
+                         <a-input 
+                            v-decorator="[ 'room', {rules: [
+                                { required: true, message: '请输入正确的房间号！', pattern: /^\d{3}$/, transform: value => +value }
+                            ]}]" placeholder="房间号" 
+                            
+                        />
+                    </a-form-item> 
+                </a-col>
+            </a-row>
+            <a-row :gutter="4">
+                <a-col :span="12">
+                    <a-form-item label="专业班级及职务" :wrapper-col="{ span: 9 }" :label-col="{ span: 14 }" has-feedback >
+                        <a-input v-decorator="[ 'majorAndClass', {rules: [{ required: true, message: '请输入专业班级！' }]}]" placeholder="请输入专业班级"  
+                         
+                         /> 
+                    </a-form-item>  
+                </a-col>
+                <a-col :span="12" >
+                    <a-form-item :wrapper-col="{ span: 8 }"  has-feedback >
+                        <a-input v-decorator="[ 'post', {rules: [{ required: true, message: '请输入班级职务！' }]}]" placeholder="请输入班级职务" />                                       
+                    </a-form-item> 
+                </a-col>
+            </a-row>
+              
             <a-form-item >
                 <a-button 
                     type="primary"
@@ -139,7 +99,7 @@
             return {
                 
                 formItemLayout: {
-                    labelCol: { span: 6},
+                    labelCol: { span: 7},
                     wrapperCol: { span: 9 },
                 },
                 buildings: [{
@@ -241,14 +201,16 @@
         computed: {
             ...mapState({   
                 name: state => state.personalInfo.name,
-                phone: state => state.personalInfo.phone,
-                gender: state => state.personalInfo.gender,
+                tel: state => state.personalInfo.tel,
+                sex: state => state.personalInfo.sex,
                 email: state => state.personalInfo.email,
-                class: state => state.personalInfo.class,
+                majorAndClass: state => state.personalInfo.majorAndClass,
                 qq: state => state.personalInfo.qq,
                 room: state => state.personalInfo.room,
-                building: state => state.personalInfo.building,
-                userID: state => state.personalInfo.userID
+                host: state => state.personalInfo.host,
+                id: state => state.personalInfo.id,
+                post: state => state.personalInfo.post,
+                age: state => state.personalInfo.age
             })
         },
         created () {
@@ -263,17 +225,17 @@
                         name: this.$form.createFormField({
                             value: this.name,
                         }),
-                        gender: this.$form.createFormField({
-                            value: this.gender,
+                        sex: this.$form.createFormField({
+                            value: this.sex,
                         }),
-                        phone: this.$form.createFormField({
-                            value: this.phone,
+                        tel: this.$form.createFormField({
+                            value: this.tel,
                         }),
                         email: this.$form.createFormField({
                             value: this.email,
                         }),
-                        class: this.$form.createFormField({
-                            value: this.class,
+                        majorAndClass: this.$form.createFormField({
+                            value: this.majorAndClass,
                         }),
                         room: this.$form.createFormField({
                             value: this.room,
@@ -281,16 +243,23 @@
                         qq: this.$form.createFormField({
                             value: this.qq,
                         }),
-                        building: this.$form.createFormField({
-                            value: this.building,
+                        host: this.$form.createFormField({
+                            value: this.host,
                         }),
-                        userID: this.$form.createFormField({
-                            value: this.userID,
+                        id: this.$form.createFormField({
+                            value: this.id,
+                        }),
+                        age: this.$form.createFormField({
+                            value: this.age,
+                        }),
+                        post: this.$form.createFormField({
+                            value: this.post,
                         })
                     };
                 },
                 onValuesChange: (_, values) =>{                    
                     this.$store.commit('update', values);
+                    console.log(values)
                 },
             });
         },

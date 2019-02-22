@@ -37,7 +37,7 @@
                 <a-col :span="12">
                     <a-form-item label="参加其他学生科技团队、普通社团情况说明" v-bind="formItemLayout" >
                         <a-textarea 
-                            v-decorator="['explanation', {rules:[
+                            v-decorator="['otherMsg', {rules:[
                                 {required: true,  message: '请填写该项！'},
                                 {max: 26, message: '超出字符限制！'}
                             ]}]" placeholder="请说明情况" :autosize="{ minRows: 3, maxRows: 3 }"
@@ -48,7 +48,7 @@
             
                 <a-form-item label="请简述一下大学四年的个人规划以及为什么希望加入QG工作室"  :label-col="formItemLayout.labelCol" :wrapper-col="{ span: 24 }">
                     <a-textarea 
-                        v-decorator="[ 'reason', {rules:[
+                        v-decorator="[ 'planAndReason', {rules:[
                             {required: true, max: 280,  message: '请填写该项！'},
                             {message: '超出字符限制！'}
                         ]}]" placeholder="请简述一下大学四年的个人规划以及为什么希望加入QG工作室" :autosize="{ minRows: 4, maxRows: 4 }"
@@ -57,7 +57,7 @@
             
             <a-form-item label="请简述能体现你以下四个方面的一件事:（1）善于协作（2）刻苦努力（3）甘于奉献（4）持之以恒"  :label-col="formItemLayout.labelCol" :wrapper-col="{ span: 24 }">
                 <a-textarea 
-                    v-decorator="['experience',{rules:[
+                    v-decorator="['oneThing',{rules:[
                         {required: true, message: '请填写该项！'},
                         { max: 320, message: '超出字符限制！'}
                     ]}]" placeholder="请简述能体现你以下四个方面的一件事" :autosize="{ minRows: 4, maxRows: 4 }"
@@ -89,9 +89,9 @@
                 hobby: state => state.detail.hobby,
                 motto: state => state.detail.motto,
                 evaluation: state => state.detail.evaluation,
-                explanation: state => state.detail.explanation,
-                reason: state => state.detail.reason,
-                experience: state => state.detail.experience
+                otherMsg: state => state.detail.otherMsg,
+                planAndReason: state => state.detail.planAndReason,
+                oneThing: state => state.detail.oneThing
             })
         },
         created () {
@@ -112,14 +112,14 @@
                         evaluation: this.$form.createFormField({
                             value: this.evaluation,
                         }),
-                        explanation: this.$form.createFormField({
-                            value: this.explanation,
+                        otherMsg: this.$form.createFormField({
+                            value: this.otherMsg,
                         }),
-                        reason: this.$form.createFormField({
-                            value: this.reason,
+                        planAndReason: this.$form.createFormField({
+                            value: this.planAndReason,
                         }),
-                        experience: this.$form.createFormField({
-                            value: this.experience,
+                        oneThing: this.$form.createFormField({
+                            value: this.oneThing,
                         }),
                     };
                 },

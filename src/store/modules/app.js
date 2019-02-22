@@ -21,6 +21,7 @@ const actions = {
             }
         }
 
+        data.groupMembers = data.teammate_1 + ' ' + data.teammate_2 + ' ' + data.teammate_3;
         delete data.current;
         delete data.right;
 

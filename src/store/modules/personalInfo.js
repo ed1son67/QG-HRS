@@ -2,14 +2,16 @@
 // 变量
 const state = {
     name: '',
-    phone: '',
+    tel: '',
     email: '',
     qq: '',
-    class: '',
-    building: [],
+    majorAndClass: '',
+    host: [],
     room: '',
-    userID: '',
-    gender: -1
+    id: '',
+    sex: '',
+    age: '',
+    post: ''
 };
 
 const actions = {

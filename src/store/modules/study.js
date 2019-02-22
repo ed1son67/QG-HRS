@@ -1,12 +1,12 @@
 
 // 变量
 const state = {
-    gpa: '',
-    fail: '',
-    CTheoryScore: '',
-    CExperScore: '',
-    EnglishScore: '',
-    prize: ''
+    achievementPoint: '',
+    isFail: '',
+    cSocre: '',
+    cExperiment: '',
+    englishScore: '',
+    rewardsAndPunishments: ''
 };
 
 const actions = {

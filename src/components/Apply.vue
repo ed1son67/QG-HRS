@@ -2,10 +2,10 @@
     <div class="main">
         <a-form :form="form"  @submit="handleSubmit">
             <a-form-item label="* 诚信条款"  v-bind="formItemLayout" >
-                <a-checkbox style="font-weight: 600;"
+                <a-checkbox style="font-weight: 600;" @change="onChange"  
                     v-decorator="[ 'agree', {valuePropName: 'checked', initialValue: true,}, {
                         rules: [
-                            {  validator: checkAgreement, message: '请选择是否服从调剂' }                   
+                                             
                     ]}]"
                 >
                     本人具有正直诚信价值观，承诺所填简历真实可信，并对由于提供虚假信息而引发的结果承担相应的法律责任，如有虚假，责任自负。
@@ -18,10 +18,20 @@
                     </a-tooltip>
                 </span>
                 <a-row>
-                    <a-col :span="1" style="margin-right: 20px;"><a-switch /></a-col>
-                    <a-col :span="3" style="margin-right: 10px;"><a-input v-decorator="[ 'teammate_1', {rules: [{ required: true, message: '请输入队友姓名！' }]}]" placeholder="队友姓名" /></a-col>
-                    <a-col :span="3" style="margin-right: 10px;"><a-input v-decorator="[ 'teammate_2', {rules: [{ required: true, message: '请输入队友姓名！' }]}]" placeholder="队友姓名" /></a-col>
-                    <a-col :span="3" style="margin-right: 10px;"><a-input v-decorator="[ 'teammate_3', {rules: [{ required: true, message: '请输入队友姓名！' }]}]" placeholder="队友姓名" /></a-col>
+                    <a-col :span="1" style="margin-right: 20px;">
+                        <a-switch 
+                            v-decorator="['isSingle', { valuePropName: 'checked' }]" />
+                    </a-col>
+                    <a-col :span="4" style="margin-right: 10px;">
+                        <a-input 
+                            v-decorator="[ 'teammate_1', ]" placeholder="队友姓名" :disabled="!isSingle " />
+                    </a-col>
+                    <a-col :span="4" style="margin-right: 10px;">
+                        <a-input v-decorator="[ 'teammate_2', ]" placeholder="队友姓名" :disabled="!isSingle "/>
+                    </a-col>
+                    <a-col :span="4" style="margin-right: 10px;">
+                        <a-input v-decorator="[ 'teammate_3', ]" placeholder="队友姓名" :disabled="!isSingle "/>
+                    </a-col>
                 </a-row>            
             </a-form-item>
             <a-form-item label="* 应聘类型" v-bind="formItemLayout">
@@ -36,7 +46,7 @@
             </a-form-item>
              <a-form-item label="应征方向" v-bind="formItemLayout" >
                 <a-radio-group  
-                    v-decorator="[ 'direction', {rules: [
+                    v-decorator="[ 'group', {rules: [
                         { required: true, message: '请选择方向！' }                   
                     ]}]"
                 >
@@ -51,7 +61,7 @@
             </a-form-item>
             <a-form-item label="是否服从调剂"  v-bind="formItemLayout" >
                 <a-radio-group  name='radioGroup'
-                    v-decorator="[ 'adjust', {rules: [
+                    v-decorator="[ 'isObey', {rules: [
                         { required: true, message: '请选择是否服从调剂' }                   
                     ]}]"     
                 >
@@ -81,9 +91,29 @@
         },
         computed: {
             ...mapState({   
-                direction: state => state.apply.direction,
-                adjust: state => state.apply.adjust,
+                group: state => state.apply.group,
+                isObey: state => state.apply.isObey,
+                isSingle: state => state.apply.isSingle,
+                teammate_1: state => state.apply.teammate_1,
+                teammate_2: state => state.apply.teammate_2,
+                teammate_3: state => state.apply.teammate_3,
             })
+        },
+        watch: {
+            isSingle(val) {
+                if (val == false) {
+                    this.$store.commit('resetTeam');
+                }
+            },
+            teammate_1(val) {
+                this.form.setFieldsValue({teammate_1: val});
+            },
+            teammate_2(val) {
+                this.form.setFieldsValue({teammate_2: val});
+            },
+            teammate_3(val) {
+                this.form.setFieldsValue({teammate_3: val});
+            }
         },
         created () {
             this.$store.commit('initializeSteps', 3);
@@ -94,12 +124,25 @@
                 },
                 mapPropsToFields: () => {
                     return {
-                        direction: this.$form.createFormField({
-                            value: this.direction,
+                        group: this.$form.createFormField({
+                            value: this.group,
                         }),
-                        adjust: this.$form.createFormField({
-                            value: this.adjust,
+                        isObey: this.$form.createFormField({
+                            value: this.isObey,
                         }),
+                        isSingle: this.$form.createFormField({
+                            value: this.isSingle,
+                        }),
+                        teammate_1: this.$form.createFormField({
+                            value: this.teammate_1,
+                        }),
+                        teammate_2: this.$form.createFormField({
+                            value: this.teammate_2,
+                        }),
+                        teammate_3: this.$form.createFormField({
+                            value: this.teammate_3,
+                        }),
+                        
                     };
                 },
                 onValuesChange: (_, values) =>{
@@ -109,10 +152,11 @@
             });
         },
         methods: {
-            checkAgreement(rule, value, callback) {
-                console.log(rule)
-                callback('123');
+            onChange(e) {
+                console.log(e.target.checked)
+                let statu = e.target.checked;
                 
+               
             },
             nextPage() {
                 // this.$store.state.app.right[4] = true;
