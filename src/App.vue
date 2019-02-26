@@ -103,15 +103,21 @@ export default {
 </script>
 
 <style>
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .page-container {
     position: relative;
     width: 950px;
     margin: 0 auto;
+    padding-bottom: 85px;  
 }
 #app {
-    height: 100%;
     position: relative;
-   
+    min-height: 100%; 
 }
 header {
     height: 85px;
@@ -167,10 +173,11 @@ header {
 footer {
     background-color: rgb(250, 250, 250);
     height: 85px;
+    width: 100%;
     border: 1px solid #d9d9d9;
-    /* position:fixed;
-    bottom: 0;
-    width: 100%; */
+    position: absolute;
+    left: 0;  
+    bottom: 0;  
     text-align: center;
 }
 footer p {
