@@ -6,10 +6,8 @@ import router from './router'
 import '../static/normalize.css'
 import store from './store'
 
-import { Button, Steps, Form, Cascader, Checkbox, Col, Input, Radio, Row, Select, Switch, Tooltip, Icon, Card, Modal} from 'ant-design-vue';
-// Vue.component(Button.name, Button);
-// Vue.component(Steps.name, Steps);
-// Vue.component(Form.name, Form);
+import { Button, Steps, Form, Cascader, Checkbox, Col, Input, Radio, Row, Select, Switch, Tooltip, Icon, Modal, Popover, Alert } from 'ant-design-vue';
+
 
 Vue.use(Button);
 Vue.use(Steps);
@@ -25,6 +23,8 @@ Vue.use(Switch);
 Vue.use(Tooltip);
 Vue.use(Icon);
 Vue.use(Modal);
+Vue.use(Popover);
+Vue.use(Alert);
 
 // Vue.use(Antd);
 Vue.config.productionTip = false

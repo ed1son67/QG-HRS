@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <header>
-        <div class="logo-container">
-            <img src="./assets/images/logo.png" alt="">
-            <span>QG Studio</span>
+        <div class="content-container">
+            <div class="logo-container">
+                <img src="./assets/images/logo.png" alt="">
+                <span>QG Studio</span>
+            </div>
+            <p>你好！同学</p>
         </div>
     </header>
     <div class="page-container" :style="styleObj">
@@ -70,7 +73,7 @@ export default {
     },
     beforeCreate() {
         // 刷新网页时返回到初始页面
-        // this.$router.push('personalInfo')
+        this.$router.push('personalInfo')
     },
     mounted(){
         // 路由系统兼容IE浏览器
@@ -85,15 +88,11 @@ export default {
                 }
             }, false)
         }
-        this.styleObj.height = document.documentElement.clientHeight - 85 * 2 +'px';
+        // this.styleObj.height = document.documentElement.clientHeight - 85 * 2 +'px';
        
     },
     created() {
-        let self = this;
-        window.addEventListener('beforeunload',function (e) {
-            // self.$router.push('personalInfo');
-            e.returnValue ="关闭提示"
-        });
+        
     },
     watch: {
     },
@@ -118,18 +117,36 @@ header {
     height: 85px;
     width: 100%;
     background-color: #0068f1;
-}
-header span {
-    font-size: 35px;
     color: #fff;
-};
+}
 
+.content-container {
+    width: 1150px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    line-height: 85px;
+    justify-content: space-between
+}
+.content-container p {
+    float: right;
+    font-size: 16px;
+    margin-right: 70px;
+}
+.logo-container img {
+    margin-top: -15px;
+    height: 85px;
+}
+.logo-container span {
+    font-size: 35px;
+    font-weight: 500;
+};
 .page {
     width: 100%;
     margin: 0 auto;
 }
 .step {
-    margin: 40px 0;
+    margin: 38px 0;
 }
 .tittle {
     font-size: 26px;
@@ -166,5 +183,17 @@ footer p {
 }
 .ant-form-item-label {
     text-align: left;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    overflow: auto;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #e6e6e6;
+    min-height: 25px;
+    min-width: 25px;
+    border: 1px solid #e0e0e0
 }
 </style>

@@ -1,4 +1,6 @@
 import { myAxios } from '../../interaction.js';
+import { IP } from '../../interaction.js';
+
 
 const state = {
     current: 0,
@@ -20,26 +22,45 @@ const actions = {
                 }
             }
         }
+        // 处理是否是单人组队
+        if (data.isSingle == false) {
+            data.isSingle = 1;
+            data.groupMembers = '';
+        }
+        else {
+            data.isSingle = 0;
+            data.groupMembers = data.teammate_1 + ' ' + data.teammate_2 + ' ' + data.teammate_3;
+        }
+        delete data.teammate_1;
+        delete data.teammate_2;
+        delete data.teammate_3;
 
-        data.groupMembers = data.teammate_1 + ' ' + data.teammate_2 + ' ' + data.teammate_3;
+        // 剔除无用数据
         delete data.current;
         delete data.right;
 
+        
+        console.log(data.building);
+        // 处理宿舍数据
+        let hoster = '';
+        for (let i = 0; i < data.building.length; i++) {
+            hoster += data.building[i]; 
+        }
+        hoster += data.room;
+        delete data.building;
+        delete data.room;
+        data.hoster = hoster;
+
+        // 处理布尔值选项
+        data.isFail = parseInt(data.isFail);
+        data.isObey = parseInt(data.isObey);
+
         console.log(data);
 
-        // myAxios({
-        //     method: 'POST',
-        //     url: '',
-        //     data: data
-        // }).then(function(res){
-            
-        // }).catch(function(err){
-            
-        // });
         return myAxios({
-                method: 'POST',
-                url: '',
-                data: data
+            method: 'POST',
+            data: data,
+            url: '/rec/commit'
         })
        
     }

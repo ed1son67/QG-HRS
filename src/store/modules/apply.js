@@ -1,8 +1,8 @@
 
 // 变量
 const state = {
-    group: 1,
-    isObey: 1,
+    grouper: '',
+    isObey: '',
     isSingle: false,
     teammate_1: '',
     teammate_2: '',

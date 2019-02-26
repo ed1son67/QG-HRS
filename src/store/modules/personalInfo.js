@@ -6,7 +6,7 @@ const state = {
     email: '',
     qq: '',
     majorAndClass: '',
-    host: [],
+    building: '',
     room: '',
     id: '',
     sex: '',

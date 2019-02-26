@@ -3,10 +3,11 @@
 const state = {
     achievementPoint: '',
     isFail: '',
-    cSocre: '',
-    cExperiment: '',
+    sc: '',
+    exp: '',
     englishScore: '',
-    rewardsAndPunishments: ''
+    rewardsAndPunishments: '',
+    rank: ''
 };
 
 const actions = {

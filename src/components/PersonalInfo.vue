@@ -2,25 +2,25 @@
     <div majorAndClass="main">
         <a-form :form="form"  @submit="handleSubmit">
             <a-form-item label="姓名"  v-bind="formItemLayout" has-feedback>
-                <a-input v-decorator="[ 'name', {rules: [{ required: true, message: '请输入你的名字!' }]}]" placeholder="请输入你的名字" />
+                <a-input v-decorator="[ 'name', {rules: [{ required: true, pattern: /^([\u4e00-\u9fa5\·]{1,16})$/, message: '请输入最多16位中文名字，允许使用“·”！' }]}]" placeholder="请输入你的名字" />
             </a-form-item>
             <a-form-item label="性别" v-bind="formItemLayout">
                  <a-radio-group   
                     v-decorator="[ 'sex', {rules: [
                         { required: true, message: '请选择性别！' }                   
                     ]}]" >
-                    <a-radio value="male">男</a-radio>
-                    <a-radio value="female">女</a-radio>
+                    <a-radio value="男">男</a-radio>
+                    <a-radio value="女">女</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item label="年龄"  v-bind="formItemLayout" has-feedback>
-                <a-input v-decorator="[ 'age', {rules: [{ required: true, message: '请输入正确的年龄！', pattern: /^[1-9]\d*$/, transform: value => +value }]}]" placeholder="请输入你的年龄" />
+                <a-input v-decorator="[ 'age', {rules: [{ required: true, message: '请输入正确的年龄！', pattern: /^\d{2}$/, transform: value => +value }]}]" placeholder="请输入你的年龄" />
                 
             </a-form-item>
              <a-form-item label="手机号码"  v-bind="formItemLayout" has-feedback>
                 <a-input 
                     v-decorator="[ 'tel', {rules: [
-                        { required: true, message: '请输入正确的手机号码!', pattern: /^\d{11}$/, transform: value => +value}                                       
+                        { required: true, message: '请输入正确的手机号码!', pattern: /^1[34578]\d{9}$/, transform: value => +value}                                       
                     ]}]" placeholder="请输入你的手机号码" />
             </a-form-item>
              <a-form-item label="邮箱" v-bind="formItemLayout" has-feedback>
@@ -33,7 +33,7 @@
              <a-form-item label="QQ"  v-bind="formItemLayout" has-feedback>
                 <a-input 
                     v-decorator="[ 'qq', {rules: [
-                        { required: true, message: '请输入正确的QQ！', pattern: /^[1-9]\d*$/, transform: value => +value }
+                        { required: true, message: '请输入正确的QQ！', pattern: /^[1-9][0-9]{4,14}$/, transform: value => +value }
                     ]}]" placeholder="请输入你的QQ" />
             </a-form-item>
              <a-form-item label="学号"  v-bind="formItemLayout" has-feedback>
@@ -44,9 +44,9 @@
             </a-form-item>   
             <a-row :gutter="4">
                 <a-col :span="12" >
-                    <a-form-item label="宿舍" :wrapper-col="{ span: 9 }" :label-col="{ span: 14 }" >
+                    <a-form-item label="宿舍" :wrapper-col="{ span: 9 }" :label-col="{ span: 14 }"  hasFeedback>
                         <a-cascader :options="buildings"  changeOnSelect  placeholder="请选择楼栋"
-                            v-decorator="[ 'host', {rules: [
+                            v-decorator="[ 'building', {rules: [
                                 { required: true, message: '请选择楼栋!' }                   
                             ]}]"    
                             
@@ -207,7 +207,7 @@
                 majorAndClass: state => state.personalInfo.majorAndClass,
                 qq: state => state.personalInfo.qq,
                 room: state => state.personalInfo.room,
-                host: state => state.personalInfo.host,
+                building: state => state.personalInfo.building,
                 id: state => state.personalInfo.id,
                 post: state => state.personalInfo.post,
                 age: state => state.personalInfo.age
@@ -243,8 +243,8 @@
                         qq: this.$form.createFormField({
                             value: this.qq,
                         }),
-                        host: this.$form.createFormField({
-                            value: this.host,
+                        building: this.$form.createFormField({
+                            value: this.building,
                         }),
                         id: this.$form.createFormField({
                             value: this.id,
@@ -259,7 +259,6 @@
                 },
                 onValuesChange: (_, values) =>{                    
                     this.$store.commit('update', values);
-                    console.log(values)
                 },
             });
         },
@@ -282,19 +281,6 @@
 </script>
 
 <style lang="" scoped>
-.main {
-    height: auto;
-    width: 100%;
-    margin: 30px 0;
-}
-.item {
-    display: flex;
-    margin: 30px 5px;
-}
 
-.label {
-    width: 200px;
-    line-height: 34px;
-}
 
 </style>

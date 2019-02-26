@@ -5,7 +5,7 @@
                 <a-col :span="11">
                     <a-form-item label="兴趣爱好"  v-bind="formItemLayout" >
                         <a-textarea 
-                            v-decorator="[ 'hobby', {rules: [
+                            v-decorator="[ 'interest', {rules: [
                                 {required: true,  message: '请填写该项！'},
                                 { max: 44, message: '超出字符限制！' }
                             ]}]" placeholder="请输入兴趣爱好" :autosize="{ minRows: 2, maxRows: 2 }" 
@@ -28,7 +28,7 @@
                         <a-textarea 
                             v-decorator="[ 'evaluation', {rules:[
                                 {required: true,  message: '请填写该项！'},
-                                {max: 230, message: '超出字符限制！'}
+                                {max: 250, message: '超出字符限制！'}
                             ]}]" placeholder="请输入自我评价" :autosize="{ minRows: 3, maxRows: 3 }" 
                         />        
                     </a-form-item>
@@ -49,8 +49,8 @@
                 <a-form-item label="请简述一下大学四年的个人规划以及为什么希望加入QG工作室"  :label-col="formItemLayout.labelCol" :wrapper-col="{ span: 24 }">
                     <a-textarea 
                         v-decorator="[ 'planAndReason', {rules:[
-                            {required: true, max: 280,  message: '请填写该项！'},
-                            {message: '超出字符限制！'}
+                            {required: true,  message: '请填写该项！'},
+                            {max: 250, message: '超出字符限制！'}
                         ]}]" placeholder="请简述一下大学四年的个人规划以及为什么希望加入QG工作室" :autosize="{ minRows: 4, maxRows: 4 }"
                     />                                        
                 </a-form-item>
@@ -59,12 +59,12 @@
                 <a-textarea 
                     v-decorator="['oneThing',{rules:[
                         {required: true, message: '请填写该项！'},
-                        { max: 320, message: '超出字符限制！'}
+                        { max: 250, message: '超出字符限制！'}
                     ]}]" placeholder="请简述能体现你以下四个方面的一件事" :autosize="{ minRows: 4, maxRows: 4 }"
                 />                        
             </a-form-item>
             
-            <a-form-item >
+            <a-form-item style="padding: 2px 0 ">
                 <a-button type="primary" html-type="submit">下一页</a-button>
                 <a-button style="margin-left: 8px" @click="prevPage">上一页</a-button>
             </a-form-item>
@@ -86,7 +86,7 @@
         },
         computed: {
             ...mapState({   
-                hobby: state => state.detail.hobby,
+                interest: state => state.detail.interest,
                 motto: state => state.detail.motto,
                 evaluation: state => state.detail.evaluation,
                 otherMsg: state => state.detail.otherMsg,
@@ -103,8 +103,8 @@
                 },
                 mapPropsToFields: () => {
                     return {
-                        hobby: this.$form.createFormField({
-                            value: this.hobby,
+                        interest: this.$form.createFormField({
+                            value: this.interest,
                         }),
                         motto: this.$form.createFormField({
                             value: this.motto,

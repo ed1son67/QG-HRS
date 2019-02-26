@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const IP = '/anywork/';  //http://10.21.48.11:8080
+export const IP = 'http://www.flyingstars.cn:1205';  
 
 export const myAxios = axios.create({
-	baseURL: IP,
+	baseURL: IP
 })
