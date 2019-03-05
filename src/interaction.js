@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const IP = 'http://www.flyingstars.cn:1205';  
+export const IP = 'https://qgstudio.org:9999';  
 
 export const myAxios = axios.create({
 	baseURL: IP

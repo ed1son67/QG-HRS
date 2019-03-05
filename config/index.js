@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        // '/api': {
-        //     target: 'http://www.flyingstars.cn:1205',  
-        //     changeOrigin: true,
-        //     pathRewrite: {
-        //         '^/api': '/'
-        //     }
-        // }
+        '/api': {
+            target: 'https://qgstudio.org:9999',  
+            changeOrigin: true,
+            pathRewrite: {
+                '^/api': '/'
+            }
+        }
     },
 
     // Various Dev Server settings

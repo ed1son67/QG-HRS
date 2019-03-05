@@ -4,9 +4,15 @@
         <div class="content-container">
             <div class="logo-container">
                 <img src="./assets/images/logo.png" alt="">
-                <span>QG Studio</span>
             </div>
-            <p>你好！同学</p>
+            <a-dropdown :trigger="['click']" style="cursor: pointer;">
+                <p >
+                    你好，同学！ <a-icon type="down" />
+                </p>
+                <a-menu slot="overlay" >
+                    <a-menu-item key="1"><a href="https://qgstudio.org/rec/"><a-icon type="logout" />&nbsp;返回招新网</a></a-menu-item>
+                </a-menu>
+            </a-dropdown>
         </div>
     </header>
     <div class="page-container" :style="styleObj">
@@ -30,9 +36,12 @@
 </template>
 
 <script>
-// console.log('join us!');
-// console.log('QG Studio');
-// console.log('no quest! no gain!');
+    console.log('你好，同学！')
+    console.log('这里是QG Studio from GDUT')
+    console.log('欢迎加入2019招募QQ群：787901186')
+    console.log('前端组期待你的加入，祝你好运！')
+    console.log('No Quests, No Gains!')
+    console.log('Proudly created by Ed1son')
 
 import personalInfo from './components/PersonalInfo.vue';
 import study from './components/Study.vue';
@@ -42,6 +51,7 @@ import { mapState } from 'vuex';
 
 
 export default {
+    
     name: 'App',
     data() {
         return {
@@ -88,16 +98,13 @@ export default {
                 }
             }, false)
         }
-        // this.styleObj.height = document.documentElement.clientHeight - 85 * 2 +'px';
-       
+        setTimeout(() =>{
+            document.body.removeChild(document.getElementById('preloader'));
+        }, 500)
     },
-    created() {
-        
-    },
-    watch: {
-    },
-    methods: {
-
+    created () {
+        let preload = document.getElementById('preloader');
+        preload.className += 'fade';
     }
 }
 </script>
@@ -107,27 +114,32 @@ html,body {
     height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
-
 .page-container {
     position: relative;
     width: 950px;
     margin: 0 auto;
     padding-bottom: 85px;  
+    
 }
 #app {
     position: relative;
     min-height: 100%; 
+    width: 100%;
+
 }
 header {
     height: 85px;
     width: 100%;
     background-color: #0068f1;
     color: #fff;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12); 
+
 }
 
 .content-container {
-    width: 1150px;
+    width: 1110px;
     margin: 0 auto;
     height: 100%;
     display: flex;
@@ -139,17 +151,19 @@ header {
     font-size: 16px;
     margin-right: 70px;
 }
-.logo-container img {
-    margin-top: -15px;
-    height: 85px;
+.logo-container {
+    height: 65px;
+    
 }
-.logo-container span {
-    font-size: 35px;
-    font-weight: 500;
-};
+.logo-container img {
+    height: 100%;
+    
+}
+
 .page {
     width: 100%;
     margin: 0 auto;
+
 }
 .step {
     margin: 38px 0;
@@ -202,5 +216,27 @@ footer p {
     min-height: 25px;
     min-width: 25px;
     border: 1px solid #e0e0e0
+}
+.fade-enter {
+  opacity:0.6;
+}
+.fade-leave{
+  opacity:1;
+}
+.fade-enter-active{
+  transition:opacity .2s;
+}
+.fade-leave-active{
+  opacity:0;
+  transition:opacity .2s;
+}
+.cus-label::before {
+    display: inline-block;
+    margin-right: 4px;
+    content: '*';
+    font-family: SimSun;
+    line-height: 1;
+    font-size: 14px;
+    color: #f5222d;
 }
 </style>

@@ -20,7 +20,7 @@
              <a-form-item label="手机号码"  v-bind="formItemLayout" has-feedback>
                 <a-input 
                     v-decorator="[ 'tel', {rules: [
-                        { required: true, message: '请输入正确的手机号码!', pattern: /^1[34578]\d{9}$/, transform: value => +value}                                       
+                        { required: true, message: '请输入正确的手机号码!', pattern: /^1[3456789]\d{9}$/, transform: value => +value}                                       
                     ]}]" placeholder="请输入你的手机号码" />
             </a-form-item>
              <a-form-item label="邮箱" v-bind="formItemLayout" has-feedback>
@@ -57,7 +57,7 @@
                     <a-form-item :wrapper-col="{ span: 8 }"  has-feedback  >
                          <a-input 
                             v-decorator="[ 'room', {rules: [
-                                { required: true, message: '请输入正确的房间号！', pattern: /^\d{3}$/, transform: value => +value }
+                                { required: true, message: '请输入正确的房间号！', pattern: /^[2-7]\d{2}$/, transform: value => +value }
                             ]}]" placeholder="房间号" 
                             
                         />
@@ -67,14 +67,14 @@
             <a-row :gutter="4">
                 <a-col :span="12">
                     <a-form-item label="专业班级及职务" :wrapper-col="{ span: 9 }" :label-col="{ span: 14 }" has-feedback >
-                        <a-input v-decorator="[ 'majorAndClass', {rules: [{ required: true, message: '请输入专业班级！' }]}]" placeholder="请输入专业班级"  
+                        <a-input v-decorator="[ 'majorAndClass', {rules: [{ required: true, message: '请输入专业班级！' },{ max: 50, message: '超出字符限制！'}]}]" placeholder="请输入专业班级"  
                          
                          /> 
                     </a-form-item>  
                 </a-col>
                 <a-col :span="12" >
                     <a-form-item :wrapper-col="{ span: 8 }"  has-feedback >
-                        <a-input v-decorator="[ 'post', {rules: [{ required: true, message: '请输入班级职务！' }]}]" placeholder="请输入班级职务" />                                       
+                        <a-input v-decorator="[ 'post', {rules: [{ required: true, message: '请输入班级职务！' },{ max: 50, message: '超出字符限制！'}]}]" placeholder="请输入班级职务" />                                       
                     </a-form-item> 
                 </a-col>
             </a-row>
@@ -147,6 +147,9 @@
                     },{
                         value: '西十四',
                         label: '西十四',
+                    },{
+                        value: '西十五',
+                        label: '西十五',
                     }],
                     }, {
                     value: '东区',

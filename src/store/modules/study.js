@@ -10,9 +10,6 @@ const state = {
     rank: ''
 };
 
-const actions = {
-
-};
 
 const mutations = {
     // 获得表单的数据
@@ -23,6 +20,6 @@ const mutations = {
 
 export default {
     state,
-    actions,
+  
     mutations
 };

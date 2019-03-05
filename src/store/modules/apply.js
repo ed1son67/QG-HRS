@@ -6,11 +6,7 @@ const state = {
     isSingle: false,
     teammate_1: '',
     teammate_2: '',
-    teammate_3: ''
-};
-
-const actions = {
-
+    // teammate_3: ''
 };
 
 const mutations = {
@@ -21,12 +17,11 @@ const mutations = {
     resetTeam: (state) => {
         state.teammate_1 = '';
         state.teammate_2 = '';
-        state.teammate_3 = '';
+        // state.teammate_3 = '';
     }
 };
 
 export default {
     state,
-    actions,
     mutations
 };

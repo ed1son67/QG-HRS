@@ -1,4 +1,3 @@
-import types from '../types/personalInfo';
 
 // 变量
 const state = {
@@ -10,9 +9,6 @@ const state = {
     oneThing: '',
 };
 
-const actions = {
-
-};
 
 const mutations = {
     // 获得表单的数据
@@ -23,6 +19,5 @@ const mutations = {
 
 export default {
     state,
-    actions,
     mutations
 };

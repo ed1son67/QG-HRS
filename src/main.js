@@ -6,7 +6,7 @@ import router from './router'
 import '../static/normalize.css'
 import store from './store'
 
-import { Button, Steps, Form, Cascader, Checkbox, Col, Input, Radio, Row, Select, Switch, Tooltip, Icon, Modal, Popover, Alert } from 'ant-design-vue';
+import { Button, Steps, Form, Cascader, Checkbox, Col, Input, Radio, Row, Select, Switch, Tooltip, Icon, Modal, Popover, Alert, Dropdown, Menu } from 'ant-design-vue';
 
 
 Vue.use(Button);
@@ -25,6 +25,8 @@ Vue.use(Icon);
 Vue.use(Modal);
 Vue.use(Popover);
 Vue.use(Alert);
+Vue.use(Dropdown);
+Vue.use(Menu);
 
 // Vue.use(Antd);
 Vue.config.productionTip = false
@@ -42,13 +44,8 @@ new Vue({
 
 
 router.beforeEach(function (to, from, next) {
-    console.log(store.state.app.current);
-    console.log(to.name);
     
-    let current = store.state.app.current;
     let right =  store.state.app.right;
-
-    
 
     const path = ['personalInfo', 'study', 'detail', 'apply'];
     let toIndex = path.indexOf(to.name);

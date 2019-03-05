@@ -29,18 +29,16 @@ const actions = {
         }
         else {
             data.isSingle = 0;
-            data.groupMembers = data.teammate_1 + ' ' + data.teammate_2 + ' ' + data.teammate_3;
+            data.groupMembers = data.teammate_1 + ' ' + data.teammate_2;
         }
         delete data.teammate_1;
         delete data.teammate_2;
-        delete data.teammate_3;
 
         // 剔除无用数据
         delete data.current;
         delete data.right;
 
         
-        console.log(data.building);
         // 处理宿舍数据
         let hoster = '';
         for (let i = 0; i < data.building.length; i++) {
@@ -55,7 +53,17 @@ const actions = {
         data.isFail = parseInt(data.isFail);
         data.isObey = parseInt(data.isObey);
 
-        console.log(data);
+
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                const element = data[key];
+                let reg = new RegExp( /\'/ , "g" )
+                if (typeof element == 'string')  {
+                    var newStr = element.replace(reg, '‘');
+                    data[key] = newStr;
+                }
+            }
+        }
 
         return myAxios({
             method: 'POST',

@@ -2,10 +2,17 @@
     <div class="main">
         <a-form :form="form"  @submit="handleSubmit">
             <a-form-item label="绩点（大一上学期）"  v-bind="formItemLayout" has-feedback>
-                <a-input v-decorator="[ 'achievementPoint', {rules: [{ required: true, pattern: /(^[0-5]{1}$)|(^[0-5]{1}[\.]{1}[0-9]{1,2}$)/, message: '请输入正确的绩点!' }]}]" placeholder="请输入你的绩点" />
+                <a-input v-decorator="[ 'achievementPoint', {rules: [{ required: true, pattern: /(^[0-4](\.\d{1,2})?$)|(^5(\.0{1,2})?$)/, message: '请输入正确的绩点!' }]}]" placeholder="请输入你的绩点" />
             </a-form-item>
-             <a-form-item label="上学期班级排名"  v-bind="formItemLayout" has-feedback>
-                <a-input v-decorator="[ 'rank', {rules: [{ required: true, message: '请输入正确的班级排名，不清楚的填无！' }]}]" placeholder="请输入上学期班级排名" />
+             <a-form-item  v-bind="formItemLayout" has-feedback>
+                <span slot="label">
+                    上学期班级排名
+                    <a-tooltip title="优秀：95 良：85 中等：75 及格：65">
+                        <a-icon type="question-circle-o" />
+                    </a-tooltip>
+                </span>
+                <a-input v-decorator="[ 'rank', {rules: [{ required: true, message: '请输入班级排名，不清楚的填无！' },{max:50, message: '超出字数限制！'}]}]" placeholder="请输入上学期班级排名" />
+
             </a-form-item>
             <a-form-item label="有无挂科" v-bind="formItemLayout">
                  <a-radio-group   
@@ -35,7 +42,7 @@
                         { required: true, message: '请输入正确的成绩！', pattern: /^(0|\d{1,2}|100)(\.\d)?$/}
                     ]}]" placeholder="请输入正确的大英（1）成绩" />
             </a-form-item>
-            <p>奖惩情况和实践经历（社会实践或计算机相关技术学习掌握情况）</p>
+            <p class="cus-label">奖惩情况和实践经历（社会实践或计算机相关技术学习掌握情况）</p>
              <a-form-item :wrapper-col="{span: 16}" >
                 <a-textarea  
                     v-decorator="[ 'rewardsAndPunishments', {rules: [
@@ -131,7 +138,6 @@
                 this.form.validateFields((err, values) => {
                     if (!err) {
                         this.nextPage();
-                        console.log('Received values of form: ', values);
                     }
                 });
             },
@@ -140,5 +146,6 @@
 </script>
 
 <style lang="" scoped>
+
 
 </style>
