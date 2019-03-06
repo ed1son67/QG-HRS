@@ -23,13 +23,25 @@
                     <a-radio value='1'>有</a-radio>
                 </a-radio-group>
             </a-form-item>
-             <a-form-item label="C语言理论课成绩"  v-bind="formItemLayout" has-feedback>
+             <a-form-item  v-bind="formItemLayout" has-feedback>
+                 <span slot="label">
+                    C语言理论课成绩
+                    <a-tooltip title="没有修过C语言的同学请填0">
+                        <a-icon type="question-circle-o" />
+                    </a-tooltip>
+                </span>
                 <a-input 
                     v-decorator="[ 'sc', {rules: [
                         { required: true, message: '请输入正确的C语言理论课成绩！', pattern: /^(0|\d{1,2}|100)(\.\d)?$/}                                       
                     ]}]" placeholder="请输入C语言理论课成绩" />
             </a-form-item>
-             <a-form-item label="C语言实验课成绩" v-bind="formItemLayout" has-feedback>
+             <a-form-item v-bind="formItemLayout" has-feedback>
+                 <span slot="label">
+                    C语言实验课成绩
+                    <a-tooltip title="没有修过C语言的同学请填0">
+                        <a-icon type="question-circle-o" />
+                    </a-tooltip>
+                </span>
                 <a-input 
                     v-decorator="[ 'exp', {rules: [
                         { required: true, pattern: /^(0|\d{1,2}|100)(\.\d)?$/, message: '请输入正确的C语言实验课成绩！'}

@@ -3,16 +3,11 @@
     <header>
         <div class="content-container">
             <div class="logo-container">
-                <img src="./assets/images/logo.png" alt="">
+                <a href="http://www.qgstudio.org/rec"><img src="./assets/images/logo.png" alt=""></a>
             </div>
-            <a-dropdown :trigger="['click']" style="cursor: pointer;">
                 <p >
-                    你好，同学！ <a-icon type="down" />
+                    你好，同学！
                 </p>
-                <a-menu slot="overlay" >
-                    <a-menu-item key="1"><a href="https://qgstudio.org/rec/"><a-icon type="logout" />&nbsp;返回招新网</a></a-menu-item>
-                </a-menu>
-            </a-dropdown>
         </div>
     </header>
     <div class="page-container" :style="styleObj">
